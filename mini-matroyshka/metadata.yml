@@ -1,0 +1,21 @@
+# This is the standard metadata for a challenge with a server-side component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: mini-matroyshka
+author: Matir
+flag: 'CTF{so_easy_an_ogre_could_do_it}'
+description:
+  A lot of the computer world is just layers of abstraction.  Layers and layers
+  and layers and layers and layers and layers and layers and layers and ...
+  layers and layers and ...
+value: 500
+tags:
+  - Misc
+notes: Private notes on deployment, setup, etc.

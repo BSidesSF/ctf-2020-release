@@ -1,0 +1,22 @@
+# This is the standard metadata for a challenge with a server-side component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: decrypto-3
+author: matir
+flag: 'CTF{core_dump_your_secrets}'
+description:
+  Fine, I learned not to roll my own crypto.  I hear OpenSSL is good and easy to
+  use, so I'll use that to encrypt my secrets.  Unfortunately, I keep crashing.
+  Can you help me figure out what the bug is?
+value: 500
+tags:
+  - Crypto
+  - Reversing
+notes: Private notes on deployment, setup, etc.

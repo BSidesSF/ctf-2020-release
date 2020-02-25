@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: rsa-debugger
+  name: rsa-debugger
+spec:
+  loadBalancerIP: 34.83.102.183
+  ports:
+  - port: 1717
+    protocol: TCP
+    targetPort: 1717
+  selector:
+    app: rsa-debugger
+  type: LoadBalancer

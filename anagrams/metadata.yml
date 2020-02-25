@@ -1,0 +1,21 @@
+# This is the standard metadata for a challenge with a server-side component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: anagrams
+author: matir
+flag: 'CTF{ONEFORANAGRAMS}'
+description:
+  Check out the BSidesSF CTF program.  We got a chance to put a puzzle in there.
+  If you're good with permutations, you'll get this once.
+value: 50
+min_value: 50
+tags:
+  - Misc
+notes: Word Jumble/Anagram challenge for program.

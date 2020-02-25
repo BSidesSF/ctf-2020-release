@@ -1,0 +1,14 @@
+{{template "base" .}}
+{{define "content"}}
+<h2>Your Recipes</h2>
+  {{if .Recipes}}
+    <ul>
+    {{range .Recipes}}
+      <li><a href="/recipe/{{.ID}}">{{.Name}}</a></li>
+    {{end}}
+    </ul>
+  {{else}}
+  <b>You have no recipes.</b>
+  {{end}}
+<p><a href="/recipe/new">Add a new recipe</a></p>
+{{end}}

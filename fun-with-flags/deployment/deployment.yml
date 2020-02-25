@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: fun-with-flags
+    tier: challenge
+  name: fun-with-flags
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
+      labels:
+        app: fun-with-flags
+        networkpolicy: allow_egress
+        tier: challenge
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env: []
+        image: gcr.io/bsides-sf-ctf-2020/fun-with-flags
+        name: fun-with-flags
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+      - env:
+        - name: COOKIES
+          value: session=.eJyFUE1vwjAM_StTzhzWdD1QiUNZu65IccVoyJwJoVHKR5uyicIagvjvCwXtuoNl-8l-fs9nMl-pz2ZTNMT_OJOHwy0tiE8WYmpy-rKT48GAXHp3dCI8ikJ_y-ehk9PpaVG_HORk-JNvhy2-g1nS_kkG141Zt_MvYRb3d5JOqyRWx-QVHKSgchfqpdBNMXnqiGY9K3NfNBviH_bHwnbbJfHvBKwMNBNjR4aqSkXksDDQaRZoLPkjq2UNImohW7tplrgsHFVpmLssjgwLOQWTnFiMNiIHYu6A4C4abufRAzGtLK4hHLsgRgqzdYtZQC2vxXIDJWqgaGeVAspbLDcKTUJlya185mH9tmFGqjQe2zsjW_OrbTI_NsW-M0Ac0iN5s1_ND19VsftzBMY-Iaw0Cu5BWbXMBNSq1jKGLZq1x8qKytqqCyN961Gn3VMvv7T3lQA.XkoLgA.ay7TpQelshlvvfFS5OqI7kHpqos;URL=https://fun-with-flags-3b5279f5.challenges.bsidessf.net/;httpOnly
+        - name: PORT
+          value: '3000'
+        image: gcr.io/bsides-sf-ctf-2020/webbot:latest
+        name: webbot
+        securityContext:
+          capabilities:
+            add:
+            - SYS_ADMIN
+      volumes: []

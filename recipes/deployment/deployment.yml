@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: recipes
+    tier: challenge
+  name: recipes
+spec:
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
+      labels:
+        app: recipes
+        networkpolicy: allow_egress
+        tier: challenge
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: MYSQL_DB
+          value: recipeserv:tastyrecipes@tcp(localhost:3306)/recipes
+        image: gcr.io/bsides-sf-ctf-2020/recipes
+        name: recipes
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+      - command:
+        - /cloud_sql_proxy
+        - -instances=bsides-sf-ctf-2020:us-west1:challenges=tcp:3306
+        - -credential_file=/secrets/cloudsql/credentials.json
+        image: gcr.io/cloudsql-docker/gce-proxy:1.16
+        name: cloudsql-proxy
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 2
+        volumeMounts:
+        - mountPath: /secrets/cloudsql
+          name: recipes-cloudsql-credentials
+          readOnly: true
+      volumes:
+      - name: recipes-cloudsql-credentials
+        secret:
+          secretName: recipes-cloudsql-credentials

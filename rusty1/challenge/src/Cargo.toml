@@ -1,0 +1,15 @@
+[package]
+name = "rusty"
+version = "1.0.0"
+authors = ["iagox86 <ron@bsidessf.org>"]
+edition = "2018"
+
+[dependencies]
+# Async i/o
+tokio = { version = "0.2", features = ["rt-core", "io-std", "process", "signal", "io-util", "sync", "macros"] }
+futures = "0.3"
+
+# These create smaller binaries
+[profile.release]
+panic = 'abort'
+lto = true

@@ -1,0 +1,46 @@
+Extract audio stream to its own file:
+
+$ ffmpeg -i earota.mkv -map 0:1 -acodec copy out.flac
+
+Convert to raw wave file:
+
+$ flac -d out.flac
+
+Create split script for sox:
+
+$ cat > split.sh
+#!/bin/sh
+chans=`soxi -c "$1"`
+while [ $chans -ge 1 ]; do
+ chans0=`printf %02i $chans`   # 2 digits hence up to 99 chans
+ out=`echo "$1"|sed "s/\(.*\)\.\(.*\)/\1-$chans0.\2/"`
+ sox "$1" "$out" remix $chans
+ chans=`expr $chans - 1`
+done
+
+
+Run split:
+
+$ chmod 755 split.sh
+$ ./split.sh out.wav
+
+Get just 16bit PCM samples out of WAV files:
+
+$ dd if=out-01.wav bs=44 skip=1 of=samp-01.bin
+$ dd if=out-02.wav bs=44 skip=1 of=samp-02.bin
+
+Extract balanced ternary by comparing the channels:
+
+$ ./decode_stereo_diff.pl samp-02.bin samp-01.bin > bternary.txt
+
+
+Convert balanced ternary to a binary file:
+
+$ ./bternary_to_file
+
+$ file out.bin
+out.bin: PNG image data, 2176 x 2346, 8-bit/color RGB, non-interlaced
+
+CTF{one_iota_away_from_riches}
+
+

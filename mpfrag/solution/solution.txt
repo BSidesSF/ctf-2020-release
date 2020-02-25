@@ -1,0 +1,126 @@
+$ file disk.bin
+disk.bin: Linux rev 1.0 ext2 filesystem data, UUID=07a34ef3-2282-447d-b2fd-1ade0b320153 (large files)
+
+Superblock has been corrupted:
+$ fls disk.bin
+Cannot determine file system type
+
+$ fls -f ext2 disk.bin
+Invalid magic value (Not an EXTxFS file system (inum count))
+
+$ sudo mount -t ext2 -o loop disk.bin /mnt/other/
+mount: /mnt/other: wrong fs type, bad option, bad superblock on /dev/loop0, missing codepage or helper program, or other error.
+
+
+First need to extract backup superblock which is at filesystem block 8193 (per ext2 default for 1k block size)
+
+$ dd if=disk.bin bs=1024 skip=8193 count=1 of=sb.bin
+1+0 records in
+1+0 records out
+1024 bytes (1.0 kB, 1.0 KiB) copied, 8.3769e-05 s, 12.2 MB/s
+
+Now put the backup superblock over the corrupted one:
+ dd if=sb.bin bs=1024 conv=notrunc seek=1 of=disk.bin
+ 1+0 records in
+ 1+0 records out
+ 1024 bytes (1.0 kB, 1.0 KiB) copied, 8.4655e-05 s, 12.1 MB/s
+
+
+Now fls and other tools understand the disk image:
+
+$ fls disk.bin
+d/d 11: lost+found
+r/r 12: 1214875.jpg
+r/r 13: 20131122-2.jpg
+r/r 14: 20131122.jpg
+r/r 15: 20140314.jpg
+r/r 16: 3_P2175345.JPG
+r/- * 0:    90fed98dd0ebc0e032caf92a3a092e34.jpg
+r/r 18:     924509.jpg
+r/r 19:     983723.jpg
+r/- * 0:    DSC_2390_mod.jpg
+r/- * 0:    DSC_2512.jpg
+r/r 22:     DSC_4335.jpg
+r/r 23:     Full_100DPI_Fix.jpg
+r/r 24:     Skyline.jpg
+r/- * 0:    cloud.jpg
+r/r 26:     new_front3.jpg
+r/- * 0:    ptzecb0.jpg
+r/- * 0:    u-g-PQ7TPY0.jpg
+r/r 29:     cloud.zip
+r/- * 0:    cloud_key.mpeg
+V/V 4097:   $OrphanFiles
+
+
+Extract cloud.zip:
+
+$ icat disk.bin 29 > cloud.zip
+
+Unknown password:
+
+$ unzip cloud.zip
+Archive:  cloud.zip
+[cloud.zip] cloud_flag.jpg password:
+
+
+cloud_key.mpeg likely contains the key.  However the file has been deleted and the inode wiped.
+
+We can 1) use a file carver  like photorec and have it search for mpeg
+files.  This will  find many fragments, each will be  saved as its own
+mpeg and each will play with a player like vlc.
+
+Or 2) we can do the extraction ourself in whatever random fragment
+order the file may be in.  The video will play out-of-order but that's
+fine.
+
+mpeg magic starts with 00 00 01 ba and should be at 1k offsets:
+
+$ hexdump -C disk.bin | egrep '^.....[048c]..  00 00 01 ba' | head
+00057000  00 00 01 ba 21 00 11 54  d3 c3 33 67 00 00 01 e0  |....!..T..3g....|
+00058800  00 00 01 ba 21 00 11 6c  43 c3 33 67 00 00 01 e0  |....!..lC.3g....|
+00059800  00 00 01 ba 21 00 11 83  b3 c3 33 67 00 00 01 e0  |....!.....3g....|
+0005a800  00 00 01 ba 21 00 11 9b  23 c3 33 67 00 00 01 e0  |....!...#.3g....|
+0005fc00  00 00 01 ba 21 00 11 b2  93 c3 33 67 00 00 01 e0  |....!.....3g....|
+00060c00  00 00 01 ba 21 00 11 ca  03 c3 33 67 00 00 01 e0  |....!.....3g....|
+00061400  00 00 01 ba 21 00 11 e1  73 c3 33 67 00 00 01 e0  |....!...s.3g....|
+00061c00  00 00 01 ba 21 00 11 f8  e3 c3 33 67 00 00 01 e0  |....!.....3g....|
+00064400  00 00 01 ba 21 00 13 10  53 c3 33 67 00 00 01 e0  |....!...S.3g....|
+00066c00  00 00 01 ba 21 00 13 27  c3 c3 33 67 00 00 01 e0  |....!..'..3g....|
+
+Instead of looking at all blocks, we can just extract the unallocated ones:
+
+$ blkls disk.bin > unalloc.bin
+
+$ hexdump -C unalloc.bin | egrep '^.....[048c]..  00 00 01 ba' | head
+00002800  00 00 01 ba 21 00 11 54  d3 c3 33 67 00 00 01 e0  |....!..T..3g....|
+00004000  00 00 01 ba 21 00 11 6c  43 c3 33 67 00 00 01 e0  |....!..lC.3g....|
+00005000  00 00 01 ba 21 00 11 83  b3 c3 33 67 00 00 01 e0  |....!.....3g....|
+00006000  00 00 01 ba 21 00 11 9b  23 c3 33 67 00 00 01 e0  |....!...#.3g....|
+0000b400  00 00 01 ba 21 00 11 b2  93 c3 33 67 00 00 01 e0  |....!.....3g....|
+0000c400  00 00 01 ba 21 00 11 ca  03 c3 33 67 00 00 01 e0  |....!.....3g....|
+0000cc00  00 00 01 ba 21 00 11 e1  73 c3 33 67 00 00 01 e0  |....!...s.3g....|
+0000d400  00 00 01 ba 21 00 11 f8  e3 c3 33 67 00 00 01 e0  |....!.....3g....|
+0000fc00  00 00 01 ba 21 00 13 10  53 c3 33 67 00 00 01 e0  |....!...S.3g....|
+00012400  00 00 01 ba 21 00 13 27  c3 c3 33 67 00 00 01 e0  |....!..'..3g....|
+
+Converting the first offset to decimal: 0x00002800 = 10240
+
+Extracting from that offset onward:
+
+$ dd if=unalloc.bin bs=1 skip=10240 of=out.mpeg
+2064384+0 records in
+2064384+0 records out
+2064384 bytes (2.1 MB, 2.0 MiB) copied, 2.23274 s, 925 kB/s
+
+The video plays a bit out-of-order but is basically visible.  The key
+is clearly "SF-G0lden-Gl0w-1849" without the quotes.
+
+Unzip with that password:
+
+$ unzip cloud.zip
+Archive:  cloud.zip
+[cloud.zip] cloud_flag.jpg password:
+  inflating: cloud_flag.jpg
+
+Cloud flag image clearly reads "CTF{bridge_ext2_gaps}"
+

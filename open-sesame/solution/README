@@ -1,0 +1,42 @@
+# Android Challenge 
+Newer versions of Android don’t store the password as a salted hash in `/data/system/password.key` with the salt in `/data/system/locksettings.db` (as outlined in [1](https://samsclass.info/128/proj/p12xpw.htm) and [2](https://forensics.spreitzenbarth.de/2012/02/28/cracking-pin-and-password-locks-on-android/). Instead they use Gatekeeper, which stores it as a HMAC in `/data/system/gatekeeper.password.key`. The type of credential used to secure the lock screen can be determined by examining the `locksettings.db` file. 
+
+```
+adb root
+adb shell
+generic_x86_64:/ # cd /data/system
+generic_x86_64:/data/system # sqlite3 lock
+locksettings.db    	locksettings.db-shm	locksettings.db-wal
+generic_x86_64:/data/system # sqlite3 locksettings.db                                                         	 
+SQLite version 3.18.2 2017-07-21 07:56:09
+Enter ".help" for usage hints.
+sqlite> .tables
+android_metadata  locksettings    
+sqlite> select * from locksettings;
+4|lockscreen.password_type_alternate|0|0
+5|migrated_biometric_weak|0|true
+2|migrated|0|true
+3|migrated_user_specific|0|true
+6|migrated_lockscreen_disabled|0|true
+7|lockscreen.enabledtrustagents|0|com.google.android.gms/.auth.trustagent.GoogleTrustAgent
+8|lockscreen.password_salt|0|3926817817791309287
+20|lockscreen.disabled|0|1
+21|lockscreen.password_type|0|262144
+22|lockscreen.profilechallenge|0|1
+23|lockscreen.passwordhistory|0|
+```
+
+The `password_type` field reveals that the password is alphabets and possibly symbols. To optimize the next step, you can drop all entries in rockyou which contain numbers. Next comes determining the structure of `gatekeeper.password.key`, which contains the salt and HMAC of the password. The bytes are as follows -
+```
+Meta - 17 bytes
+Salt - 8 bytes
+Signature - 32 bytes 
+```
+
+I found a [python script](https://github.com/Vxer-Lee/AndroidPin-Crack) which did most of the heavy lifting, and modified it to include a function to support passphrases. 
+
+```
+adb root
+adb pull /data/system/gatekeeper.password.key
+python solution.py
+```

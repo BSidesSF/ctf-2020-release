@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: csp-1
+    tier: challenge
+  name: csp-1
+spec:
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
+      labels:
+        app: csp-1
+        networkpolicy: allow_egress
+        tier: challenge
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env: []
+        image: gcr.io/bsides-sf-ctf-2020/csp-1
+        name: csp-1
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+      - env:
+        - name: COOKIES
+          value: admin=e397d059d7148ad6ecacdf4af7a1deda;URL=https://csp-1-5aa1f221.challenges.bsidessf.net/;httpOnly
+        - name: PORT
+          value: '3000'
+        image: gcr.io/bsides-sf-ctf-2020/webbot:latest
+        name: webbot
+        securityContext:
+          capabilities:
+            add:
+            - SYS_ADMIN
+      volumes: []

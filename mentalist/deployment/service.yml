@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mentalist
+  name: mentalist
+spec:
+  loadBalancerIP: 35.230.88.165
+  ports:
+  - port: 12345
+    protocol: TCP
+    targetPort: 12345
+  selector:
+    app: mentalist
+  type: LoadBalancer

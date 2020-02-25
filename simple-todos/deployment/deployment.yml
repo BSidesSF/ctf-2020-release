@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: simple-todos
+    tier: challenge
+  name: simple-todos
+spec:
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
+      labels:
+        app: simple-todos
+        networkpolicy: allow_egress
+        tier: challenge
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env: []
+        image: gcr.io/bsides-sf-ctf-2020/simple-todos
+        name: simple-todos
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+      volumes: []

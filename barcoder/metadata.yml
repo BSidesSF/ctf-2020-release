@@ -1,0 +1,9 @@
+version: beta1
+name: barcoder
+author: iagox86
+flag: 'CTF{way_too_common}'
+description: Reveal my identity! What's the flag encoded in the badge?
+value: 500
+tags:
+  - Forensics
+  - "101"

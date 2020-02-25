@@ -1,0 +1,13 @@
+version: beta1
+name: gman
+author: iagox86
+flag: 'CTF{whats_this_game_again}'
+description: Win the game! Escape the fuzz! Use the provided `connect.sh` script to get proper terminal settings - if walls don't look SOLID solid, consider another terminal emulator (works great on `kitty`, looks so-so in `cmd.exe` and `xterm`)
+value: 500
+tags:
+  - Reversing
+  - Pwnable
+  - "1337"
+port: 1337
+protocol: tcp
+flag_path: /home/ctf/flag.txt

@@ -1,0 +1,25 @@
+# This is the standard metadata for a challenge with a web component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: csp-2
+author: itsC0rg1
+flag: 'CTF{Canned_Spam_Perfection}'
+description: Can you bypass the CSP to steal the flag?
+value: 500
+tags:
+  - Web
+port: 8000
+protocol: http
+flag_path: /csp-two-flag
+webbot:
+  port: 3000
+  cookies:
+    - "admin=f9c56c41eb6896da26b49fbc8c03b4d0;URL=https://%(hostname)s/;httpOnly"
+notes: XSS challenge needs webbot

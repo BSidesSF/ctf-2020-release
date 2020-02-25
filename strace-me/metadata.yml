@@ -1,0 +1,9 @@
+version: beta1
+name: strace-me
+author: iagox86
+flag: 'CTF{the_longer_the_flag_is_the_more_interesting_output_you_are_seeing_so_the_long_flag_is_long!}'
+description: This program seems to be sending us a hidden message. Can you find it?
+value: 500
+tags:
+  - Reversing
+  - "101"

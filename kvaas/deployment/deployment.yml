@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: kvaas
+    tier: challenge
+  name: kvaas
+spec:
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
+      labels:
+        app: kvaas
+        networkpolicy: allow_egress
+        tier: challenge
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env: []
+        image: gcr.io/bsides-sf-ctf-2020/kvaas
+        name: kvaas
+        ports:
+        - containerPort: 3344
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+      volumes: []

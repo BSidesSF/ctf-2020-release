@@ -1,0 +1,25 @@
+{{template "base" .}}
+{{define "content"}}
+<h2>Register</h2>
+{{if .Error}}
+  <div class='alert alert-danger'>{{.Error}}</div>
+{{end}}
+<form method="POST" action="/register">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input name="username" id="username" placeholder="user"
+      class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input name="password" id="password" type="password" placeholder="password"
+      class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="password2">Repeat Password</label>
+    <input name="password2" id="password2" type="password" placeholder="password"
+      class="form-control" required>
+  </div>
+  <input type="submit" class="btn btn-primary" value="Register">
+</form>
+{{end}}

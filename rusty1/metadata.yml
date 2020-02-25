@@ -1,0 +1,12 @@
+version: beta1
+name: rusty1
+author: iagox86
+flag: 'CTF{yeah_but_you_had_the_source}'
+description: We found the backdoor for a server, and they even included source code! Can you parse Async Rust code and use the backdoor?
+value: 500
+tags:
+  - Reversing
+  - "101"
+port: 8832
+protocol: tcp
+flag_path: /home/ctf/flag.txt

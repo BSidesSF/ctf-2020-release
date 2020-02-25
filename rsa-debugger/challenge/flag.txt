@@ -1,0 +1,1 @@
+CTF{curveball_not_just_for_ecc}

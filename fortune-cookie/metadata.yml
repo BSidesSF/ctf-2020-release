@@ -1,0 +1,26 @@
+# This is the standard metadata for a challenge with a server-side component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: fortune-cookie
+scoreboard_name: 'Fortune Cookie'
+flag: 'CTF{shallweplayagame}'
+author: iagox86
+description:
+  Fortune Cookies are believed to have been invented by Asian-American
+  immigrants here on the west coast.  It's not certain exactly when or where,
+  but what is known is that they're a staple in the wonderful restaurants of
+  San Francisco's Chinatown.  They're also floating around the conference!  If
+  you find one, it might hold more than a fortune for you.
+value: 25
+min_value: 25
+tags:
+  - Onsite
+  - Misc
+notes: Private notes on deployment, setup, etc.

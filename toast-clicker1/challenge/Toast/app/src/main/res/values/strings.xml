@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Toast Clicker</string>
+    <string name="click_counter">Clicks</string>
+</resources>

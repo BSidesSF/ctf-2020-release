@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gman
+  name: gman
+spec:
+  loadBalancerIP: 34.83.68.208
+  ports:
+  - port: 1337
+    protocol: TCP
+    targetPort: 1337
+  selector:
+    app: gman
+  type: LoadBalancer

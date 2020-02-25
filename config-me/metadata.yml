@@ -1,0 +1,9 @@
+version: beta1
+name: config-me
+author: iagox86
+flag: 'CTF{my_rust_is_rusty}'
+description: Find the password encrypted in the configuration file
+value: 500
+tags:
+  - Reversing
+  - "101"

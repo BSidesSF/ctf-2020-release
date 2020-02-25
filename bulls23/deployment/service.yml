@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bulls23
+  name: bulls23
+spec:
+  loadBalancerIP: 34.83.6.80
+  ports:
+  - port: 8888
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: bulls23
+  type: LoadBalancer

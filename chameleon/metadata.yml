@@ -1,0 +1,14 @@
+version: beta1
+name: chameleon
+author: iagox86
+flag: 'CTF{dont_hack_the_boat}'
+description: Somebody encrypted our flag and lost the key! Can you decrypt it? We've included the encryption utility, it should come in handy!
+value: 500
+tags:
+  - Crypto
+  - Reversing
+  - "1337"
+notes: This has a server component, but it's built into the client so the user doesn't need to be told about it
+port: 4567
+protocol: http
+replicas: 1

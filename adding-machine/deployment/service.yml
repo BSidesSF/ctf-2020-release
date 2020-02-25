@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: adding-machine
+  name: adding-machine
+spec:
+  loadBalancerIP: 35.230.74.94
+  ports:
+  - port: 12345
+    protocol: TCP
+    targetPort: 12345
+  selector:
+    app: adding-machine
+  type: LoadBalancer

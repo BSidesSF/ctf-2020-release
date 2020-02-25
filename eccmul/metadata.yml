@@ -1,0 +1,22 @@
+# This is the standard metadata for a challenge with a server-side component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: eccmul
+author: symmetric
+flag: 'CTF{babys_first_scalar_multiplication}'
+description: 'Never done ECC before? Now you can!'
+value: 500
+tags:
+  - Crypto
+  - "101"
+port: 25519
+protocol: tcp # accepted: http, https, tcp, udp
+flag_path: /home/ctf/flag.txt # Optional; but helpful for players
+notes: Private notes on deployment, setup, etc.

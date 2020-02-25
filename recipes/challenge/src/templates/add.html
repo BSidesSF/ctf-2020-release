@@ -1,0 +1,26 @@
+{{template "base" .}}
+{{define "content"}}
+<h2>New Recipe</h2>
+{{if .Error}}
+  <div class='alert alert-danger'>{{.Error}}</div>
+{{end}}
+<form method="POST" action="/recipe/new">
+  <div class="form-group">
+    <label for="name">Recipe Name</label>
+    <input name="name" id="name" placeholder="Delicious Food"
+                                 class="form-control"
+                                 required>
+  </div>
+  <div class="form-group">
+    <label for="recipe">Recipe</label>
+    <textarea name="body" id="recipe" class="form-control" rows="40" required></textarea>
+  </div>
+  <div class="form-group">
+    <label for="picture">Picture URL</label>
+    <input name="image_url" id="image_url" class="form-control">
+    <small class="form-text text-muted">Must be on a reachable web server.  JPG
+    or PNG image formats only.</small>
+  </div>
+  <input type="submit" value="Add Recipe" class="btn btn-primary">
+</form>
+{{end}}

@@ -1,0 +1,21 @@
+# This is the standard metadata for a challenge with a server-side component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: eavesdropper
+author: corgi
+flag: 'CTF{DTMF_is_Awesome}'
+description: We managed to eavesdrop and record Mark's call to Corgi bank, can you decipher his identification code and call +1-406-445-0909 to recieve the flag.
+value: 500
+tags:
+  - Forensics
+port: 8000
+protocol: http
+omit_link: true
+notes: Twilio is configured to hostname, only thing required for this challenge is the audio recording. Do not list the IP address in challenge.

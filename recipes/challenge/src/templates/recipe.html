@@ -1,0 +1,13 @@
+{{template "base" .}}
+{{define "content"}}
+<h3>{{.Recipe.Name}}</h3>
+<div id="recipe-body">
+  <p><b>By {{.User.Username}}</b></p>
+  {{if .Recipe.Image}}
+  <img src="{{.SanitizedImage}}" class="float-right">
+  {{end}}
+  <blockquote style="white-space:pre;">
+    {{.Recipe.Body}}
+  </blockquote>
+</div>
+{{end}}

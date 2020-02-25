@@ -1,0 +1,30 @@
+This message is encoded using a technique called "Chaffing and Winnowing"[1],
+a technique that was first published by Ron Rivest in an article published on
+the 18th of March 1998 (1998/03/18).  Unfortunately, my implementation of the
+technique suffers from very significant flaws, not the least of which is the
+failure to include a counter within the the MAC'd portion of the data.  This
+leads to all valid bytes with the same value having the same MAC, which should
+allow for a fairly trivial frequency analysis attack on the message.
+Ultimately, if you're reading this, then you've found *some* way to crack the
+encoding applied here.
+
+Chaffing and winnowing also leads to a pretty major blow up in size.  Imagine
+if, instead of 31 bytes of chaff per byte of message, I had used the maximum
+255.  Imagine that I used a 256-bit MAC instead of 128.  (256 bits: military
+grade crypto!!@!)
+
+At this point, you've been patient enough through my diatribe (which is really
+just to give you the plaintext you need to launch your attack against the output
+of this encoding).  What you're really here for is the FLAG.  Like most of our
+other flags, this is in the typical CTF{} format.
+
+CTF{thanks_to_rivest_for_all_his_contributions}
+
+- Matir.
+(@Matir, https://systemoverlord.com)
+
+Greetz to decreasedsales, dissect0r, poptart, ehntoo, illusorycake, and
+zerobitsmith.
+
+
+[1]: https://en.wikipedia.org/wiki/Chaffing_and_winnowing

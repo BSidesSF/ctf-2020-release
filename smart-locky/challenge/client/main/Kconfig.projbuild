@@ -1,0 +1,46 @@
+# put here your custom config value
+menu "Smart Locky Configuration"
+config ESP_WIFI_SSID
+    string "WiFi SSID"
+    default "myssid"
+    help
+	SSID (network name) for the project to connect to.
+
+config ESP_WIFI_PASS
+    string "WiFi Password"
+    default "mypassword"
+    help
+	WiFi password (WPA or WPA2) for the project to use.
+
+config ESP_MAXIMUM_RETRY
+    int "Maximum retry"
+    default 20
+    help
+  Set the Maximum retry to avoid station reconnecting to the AP
+  unlimited when the AP is really inexistent.
+
+config SPIFFS_BASE_ADDR
+    hex "SPIFFS Base address"
+    range 100000 1FFE000
+    default 180000
+    help
+	Starting address of the SPIFFS area in ESP32 Flash
+
+config SPIFFS_SIZE
+    int "SPIFFS Size in bytes"
+    range 262144 2097152
+    default 1048576
+
+config SPIFFS_LOG_BLOCK_SIZE
+    int "SPIFFS Logical block size"
+    range 4098 65536
+    default 8192
+
+config SPIFFS_LOG_PAGE_SIZE
+    int "SPIFFS Logical page size"
+    range 256 2048
+    default 256
+    help
+	Set it to the phisycal page size og the used SPI Flash chip.
+
+endmenu

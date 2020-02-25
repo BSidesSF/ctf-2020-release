@@ -1,0 +1,1 @@
+CTF{babys_first_scalar_multiplication}

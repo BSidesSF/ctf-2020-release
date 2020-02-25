@@ -1,0 +1,15 @@
+version: beta1
+name: maltty
+author: Matir
+flag: 'CTF{notJustCCleaner}'
+description:
+  In December of 2019, many of the hosts in the BSidesSF organization were
+  compromised.  We think we traced it to this modified version of PuTTY, but
+  we can't figure out what data was being sent.  When we analyze it on another
+  host, we see nothing strange, but on the management hosts, we think it was
+  beaconing home.  Can you find out what it was sending?
+value: 500
+tags:
+  - Reversing
+  - Windows
+notes:

@@ -1,0 +1,1 @@
+CTF{so_easy_an_ogre_could_do_it}

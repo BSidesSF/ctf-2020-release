@@ -1,0 +1,22 @@
+# This is the standard metadata for a challenge with a server-side component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: kvaas
+author: matir
+flag: 'CTF{use_after_free_after_use_after_free}'
+description:
+  Key-Value As A Service!  I'm sure to be acquired soon!
+value: 500
+tags:
+  - Pwnable
+port: 3344
+protocol: tcp # accepted: http, https, tcp, udp
+flag_path: /home/ctf/flag.txt # Optional; but helpful for players
+notes: Private notes on deployment, setup, etc.

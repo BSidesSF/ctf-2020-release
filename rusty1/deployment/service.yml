@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: rusty1
+  name: rusty1
+spec:
+  loadBalancerIP: 35.199.148.101
+  ports:
+  - port: 8832
+    protocol: TCP
+    targetPort: 8832
+  selector:
+    app: rusty1
+  type: LoadBalancer

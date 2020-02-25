@@ -1,0 +1,22 @@
+# This is the standard metadata for a challenge with a server-side component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: decrypto-2
+author: matir
+flag: 'CTF{but_even_I_couldnt_break_IT}'
+description:
+  "[Kerckhoffs's principle](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle)
+  states that \"A cryptosystem should be secure even if everything about the
+  system, except the key, is public knowledge.\"  So here's our **really**
+  unbreakable cipher."
+value: 500
+tags:
+  - Crypto
+notes: Private notes on deployment, setup, etc.

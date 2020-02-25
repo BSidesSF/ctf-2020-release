@@ -1,0 +1,25 @@
+# This is the standard metadata for a challenge with a web component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: fun-with-flags
+author: corgi
+flag: 'CTF{Clandestine_Secret_Stealing}'
+description: The admin, Sheldon has the challenge flag, can you steal it?
+value: 500
+tags:
+  - Web
+port: 8000
+protocol: http # accepted: http, https, tcp, udp
+notes: "Set environment variable WEBBOT_IP and set the session cookie for Webbot. Password: sheldon:$&+D-UhB?HaDLY96"
+replicas: 1
+webbot:
+  port: 3000
+  cookies:
+    - "session=.eJyFUE1vwjAM_StTzhzWdD1QiUNZu65IccVoyJwJoVHKR5uyicIagvjvCwXtuoNl-8l-fs9nMl-pz2ZTNMT_OJOHwy0tiE8WYmpy-rKT48GAXHp3dCI8ikJ_y-ehk9PpaVG_HORk-JNvhy2-g1nS_kkG141Zt_MvYRb3d5JOqyRWx-QVHKSgchfqpdBNMXnqiGY9K3NfNBviH_bHwnbbJfHvBKwMNBNjR4aqSkXksDDQaRZoLPkjq2UNImohW7tplrgsHFVpmLssjgwLOQWTnFiMNiIHYu6A4C4abufRAzGtLK4hHLsgRgqzdYtZQC2vxXIDJWqgaGeVAspbLDcKTUJlya185mH9tmFGqjQe2zsjW_OrbTI_NsW-M0Ac0iN5s1_ND19VsftzBMY-Iaw0Cu5BWbXMBNSq1jKGLZq1x8qKytqqCyN961Gn3VMvv7T3lQA.XkoLgA.ay7TpQelshlvvfFS5OqI7kHpqos;URL=https://%(hostname)s/;httpOnly"

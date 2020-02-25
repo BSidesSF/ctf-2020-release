@@ -1,0 +1,12 @@
+{
+  "name": "simple-todos",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.8.4",
+    "bcrypt": "^3.0.7",
+    "meteor-node-stubs": "~0.2.0"
+  }
+}

@@ -1,0 +1,39 @@
+<html>
+<title>
+    Bsides SF CTF: Fun with flags
+</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+
+<body>
+    <div class="banner">
+        <h1>Fun with Flags</h1>
+        <h3>By Sheldon Cooper</h3>
+    </div>
+    <form action="/register" method="POST">
+        <div class="group">
+            Username
+            {{ form.username }}<span class="highlight"></span><span class="bar"></span>
+            {% if form.username.errors %}
+            <ul class="errors">{% for error in form.username.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <div class="group">
+            Password
+            {{ form.password }}<span class="highlight"></span><span class="bar"></span>
+            {% if form.password.errors %}
+            <ul class="errors">{% for error in form.password.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <div class="group">
+            Confirm Password
+            {{ form.confirm }}<span class="highlight"></span><span class="bar"></span>
+            {% if form.confirm.errors %}
+            <ul class="errors">{% for error in form.confirm.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        {{ form.submit(class_='button buttonBlue') }}
+    </form>
+    </footer>
+</body>
+
+</html>

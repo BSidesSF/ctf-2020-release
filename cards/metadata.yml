@@ -1,0 +1,23 @@
+# This is the standard metadata for a challenge with a web component.
+# In terms of file structure, please also have the following:
+#
+# - A challenge/ folder with everything needed to create the challenge assets
+# - A distfiles/ folder which contains all files (or symlinks to files) that
+#   will be attached to the challenge
+# - A solution/ folder with a working solution to the challenge (or a README.md
+#   file documenting the solution)
+
+version: beta1
+name: 'cards'
+author: Matir
+flag: 'CTF{time_travel_like_a_doctor}'
+description:
+  San Francisco has the occasional underground card room.  Can you run the table
+  in this game?
+value: 500
+tags:
+  - Web
+port: 8080
+protocol: http # accepted: http, https, tcp, udp
+flag_path: /home/ctf/flag.txt # Optional; but helpful for players
+notes: Private notes on deployment, setup, etc.

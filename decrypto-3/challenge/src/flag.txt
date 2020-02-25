@@ -1,0 +1,16 @@
+PR_SET_DUMPABLE (since Linux 2.3.20)
+Set the state of the "dumpable"
+flag, which determines whether core dumps are produced for the calling process
+upon delivery of a signal whose default behavior is to produce a core dump.
+
+MADV_DONTDUMP (since Linux 3.4)
+Exclude from a core dump those pages in the range specified by addr and length.
+This is useful in applications that have large areas of memory that are known
+not to be useful in a core dump. The effect of MADV_DONTDUMP takes precedence
+over the bit mask that is set via the /proc/PID/coredump_filter file (see
+core(5)).
+
+
+Man, if only I'd known about those options before I dumped core and sent it out.
+
+CTF{core_dump_your_secrets}

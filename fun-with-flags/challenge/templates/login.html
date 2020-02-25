@@ -1,0 +1,26 @@
+<html>
+<title>
+    Bsides SF CTF: Fun with flags
+</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+
+<body>
+    <div class="banner">
+        <h1>Fun with Flags</h1>
+        <h3>By Sheldon Cooper</h3>
+    </div>
+    <form action="/login" method="POST">
+        <div class="group">
+            Username
+            {{ form.username }}<span class="highlight"></span><span class="bar"></span>
+        </div>
+        <div class="group">
+            Password
+            {{ form.password }}<span class="highlight"></span><span class="bar"></span>
+        </div>
+        {{ form.submit(class_='button buttonBlue') }}
+    </form>
+    <center><p> New User? <a href="/register">Register here.</a></p></center>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Web Application Security Exercises</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material.teal-red.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+      <header class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">CSP Exercise 2</span>
+          <div class="mdl-layout-spacer"></div>
+        </div>
+      </header>
+      <div class="demo-ribbon"></div>
+      <main class="demo-main mdl-layout__content">
+        <div class="demo-container mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+          <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+            <h3>CSP 2 Output</h3>
+              <div>
+                <b>You entered:</b><br/>
+                {{ payload }} <br/>
+              </div>
+              <div>
+                <b>Rendered as:</b><br/>
+                  {% autoescape false %}
+                    {{ payload }}
+                  {% endautoescape %}
+              </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/material.min.js') }}"></script>
+  </body>
+</html>

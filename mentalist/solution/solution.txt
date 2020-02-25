@@ -1,0 +1,53 @@
+What number am I thinking of? 1
+Actually I was thinking of 31892324802327, try again
+What number am I thinking of? 1
+No I'm sorry, I was thinking of 63096770066530
+What number am I thinking of? 1
+Hmmm no. My number was 7444747622723, are you sure you're okay?
+What number am I thinking of? 1
+I'm getting worried. I was thinking of 84322089238008; you're not doing so well.
+What number am I thinking of? 1
+I grow tired of your failures. My number was 38523969703051
+What number am I thinking of? 1
+Nope. 87128079417422 Perhaps you aren't the one I was waiting for?
+What number am I thinking of? 1
+WRONG! It was 25110355585569
+What number am I thinking of? 1
+My patience thins... 28077258240496 was my number
+What number am I thinking of? 1
+You're getting on my nerves. It was 88509772648973
+What number am I thinking of? 1
+I'm only going to give you one more chance. I was thinking of 47301170962932
+What number am I thinking of? 14556630122131
+Incredible! I WAS thinking of that number! But can you do it again?
+What number am I thinking of? 86789829252434
+You really are the one that was foretold. Please accept this knowldege:
+CTF{rand_should_be_enough_for_anyone}
+
+
+$ cat | egrep -v '^What number' | egrep -o '[0-9]+' | ./lcg_break.pl
+Actually I was thinking of 31892324802327, try again
+What number am I thinking of? 1
+No I'm sorry, I was thinking of 63096770066530
+What number am I thinking of? 1
+Hmmm no. My number was 7444747622723, are you sure you're okay?
+What number am I thinking of? 1
+I'm getting worried. I was thinking of 84322089238008; you're not doing so well.
+What number am I thinking of? 1
+I grow tired of your failures. My number was 38523969703051
+What number am I thinking of? 1
+Nope. 87128079417422 Perhaps you aren't the one I was waiting for?
+What number am I thinking of? 1
+WRONG! It was 25110355585569
+What number am I thinking of? 1
+My patience thins... 28077258240496 was my number
+What number am I thinking of? 1
+You're getting on my nerves. It was 88509772648973
+What number am I thinking of? 1
+I'm only going to give you one more chance. I was thinking of 47301170962932
+Params pass!
+a = 17379383101081; c = 20401543959007; m = 98536997084526
+Got ax + c = m; a: 17379383101081 c: 20401543959007 m: 98536997084526
+Next num 1: 14556630122131
+Next num 2: 86789829252434
+

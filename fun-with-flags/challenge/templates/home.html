@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>BSidesSF Fun with Flags</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material.teal-red.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+        <header class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">{{ current_user.username }}'s Flags</span>
+                <div class="mdl-layout-spacer"></div>
+            </div>
+        </header>
+        <div class="demo-ribbon"></div>
+        <main class="demo-main mdl-layout__content">
+            <div class="demo-container mdl-grid">
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+                <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+                    <h3>Fun with Flags</h3>
+                    <figure>
+                        <img src="{{ url_for('static', filename='img/bsides_logo_2020.png') }}" alt="BsidesSF 2020" style="width:100%">
+                        <figcaption>Bsides SF Flag, the one that is worth points!</figcaption>
+                    </figure>
+                    <h3>Messages for {{ current_user.username }}</h3>
+                    {% for message in messages %}
+                    <div class="message-header">
+                        <b> From: </b> {{ message.from_username }} <br />
+                        <b> Title: </b> {{ message.title }} <br />
+                    </div>
+                    <div class="message-body">
+                        <i>{{ message.content |clean(tags=['style']) }}</i><br/>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                    <div>
+                      <input type="hidden" name="flag" value={{ flag }}>
+                      <p>End of messages. </p>
+                    </div>
+                    <h3> Send a message </h3>
+                    <form action="/home" method="POST">
+                        <label> {{ form.to_user.label }} </label>
+                        {{ form.to_user }}
+                        <label> {{ form.title.label }} </label>
+                        {{ form.title }}
+                        <label> {{ form.content.label }} </label>
+                          {{ form.content }}
+                        <p> Express your style </p>
+                        {{ form.csrf_token }}
+                        {{ form.submit }}
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/material.min.js') }}"></script>
+</body>
+
+</html>

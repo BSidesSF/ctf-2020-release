@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>0x15</title>
+
+<link rel="stylesheet" type="text/css"
+      href="/cards.min.css" />
+<link rel="stylesheet" type="text/css"
+      href="/blackjack.css" />
+
+<body>
+  <div id="container">
+    <h1 class='left'>0x15</h1>
+    <div id="game">
+      <div id="balance">
+        Balance: <span id="balanceAmount"></span>
+        <span id='rules-link'>Rules</span>
+      </div>
+      <div id="field-container">
+        <div id="field">
+          <div id="dealer-box" class="hand-box">
+            <div id="dealer" class="hand hhand-compact"></div>
+          </div>
+          <div id="player-box" class="hand-box">
+            <div id="player" class="hand hhand-compact"></div>
+          </div>
+        </div>
+        <div id="rules">
+          <h4 id='rules-close'>Close &#x2715;</h4>
+          <h2>Rules</h2>
+          <ul>
+            <li>Blackjacks Pay 3:2</li>
+            <li>Dealer Hits Soft 17</li>
+            <li>No Splitting</li>
+            <li>Chip Limit: <span id='WinAmount'></span></li>
+          </ul>
+        </div>
+        <div id="error">
+          <h4 id='error-close'>Close &#x2715;</h4>
+          <h2>Error</h2>
+          <span id="error-text"></span>
+        </div>
+        <div id="flag">
+          <h2>Flag</h2>
+          <span id="flag-text"></span>
+        </div>
+      </div> <!--field-container-->
+      <div id="controls">
+        Bet:
+        <input type="range" min=0 max=0 id="bet">
+        <span id="betText"></span>
+        <button id="deal">Deal</button>
+        <button id="hit">Hit</button>
+        <button id="stand">Stand</button>
+        <button id="double">Double</button>
+        <span id="gameState"></span>
+      </div>
+    </div>
+  <div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        type="text/javascript"></script>
+<script src="/blackjack.js" type="text/javascript"></script>
+</html>

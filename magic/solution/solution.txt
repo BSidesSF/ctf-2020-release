@@ -1,0 +1,18 @@
+PNG file has pixels hidden by alpha channel.
+One pixel color stands out as highly used (162 pixels with the same color) versus the next most frequent color (3 pixels with the same color).
+
+Take histogram to find the color:
+
+$ pngtopam -alphapam unicorn_noise_with_alpha.png | dd bs=1 skip=69 2>/dev/null | hexdump -C | egrep -o '(  .. .. .. 00|.. .. .. 00  )' | sed -r 's/ //g' | sort | uniq -c | sort -nr | head -n 1
+    162 1cc19900
+
+Re-write the PNG by replacing that color with black and restoring making the pixels opaque again:
+
+$ pngtopam -alphapam unicorn_noise_with_alpha.png | sed -r 's/\x1c\xc1\x99\x00/\x00\x00\x00\xff/g' | pamtopng > new.png
+
+
+The resulting black pixels are clearly a QR code missing the control handles.  Restore those manually and scan.
+
+CTF{magical_unicorn_gait}
+
+

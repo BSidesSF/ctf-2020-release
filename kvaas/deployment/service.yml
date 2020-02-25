@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kvaas
+  name: kvaas
+spec:
+  loadBalancerIP: 35.199.184.242
+  ports:
+  - port: 3344
+    protocol: TCP
+    targetPort: 3344
+  selector:
+    app: kvaas
+  type: LoadBalancer

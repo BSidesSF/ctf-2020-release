@@ -1,0 +1,15 @@
+service nibbler
+{
+    protocol       = tcp
+    disable        = no
+    port           = 1337
+    flags          = REUSE
+    socket_type    = stream
+    wait           = no
+    user           = ctf
+    server         = /home/ctf/gman
+    type           = UNLISTED
+    log_type       = FILE /tmp/gman.log
+    log_on_success = PID HOST EXIT
+    log_on_failure = HOST
+}

